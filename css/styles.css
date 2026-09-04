@@ -1,6 +1,9 @@
 /* ==========================================================================
    Cauce — landing page
-   Paleta: Tinta, Papel, Musgo, Barro, Piedra, Cal (ver brief de diseño).
+   Paleta: Tinta (tinta azul noche), Papel (blanco frío), Río (azul,
+   antes Musgo), Barro, Piedra (gris-azulado), Cal (blanco puro). El
+   nombre "Cauce" es un cauce de agua: el azul es del agua, Piedra son
+   sus orillas, Tinta es el fondo del río de noche.
    Tipografía: system stack sans para texto, monospace de sistema para
    toda cifra (calculadora, comparativas, precio).
    Mobile-first. Sin fuentes ni assets remotos.
@@ -8,13 +11,13 @@
 
 :root {
   /* Color */
-  --tinta: #1e2a28;
-  --papel: #f3f1ec;
-  --musgo: #4b6358;
-  --musgo-claro: #8fae9f;
-  --barro: #a34a3a;
-  --piedra: #c9c4b6;
-  --cal: #fffdf8;
+  --tinta: #0f2a4a;
+  --papel: #f2f6fb;
+  --musgo: #2563a8;
+  --musgo-claro: #8fb8e8;
+  --barro: #b0483a;
+  --piedra: #ccd9e8;
+  --cal: #ffffff;
 
   /* Tipografía */
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -27,7 +30,10 @@
   --space-4: 2.5rem;
   --space-5: 4rem;
 
-  --radius: 3px;
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
   --max-width: 880px;
   --header-height: 5.5rem;
 
@@ -126,7 +132,7 @@ h2 { font-size: 1.5rem; }
   font-weight: 600;
   font-size: 1rem;
   padding: 0.75em 1.4em;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   text-decoration: none;
   border: 1.5px solid transparent;
 }
@@ -210,7 +216,7 @@ html {
 .cover--tinta .item-desc { opacity: 0.78; }
 .cover--tinta .eyebrow,
 .cover--tinta .numbered-list .num { color: var(--musgo-claro); }
-.cover--tinta .numbered-list li + li { border-top-color: rgba(243, 241, 236, 0.2); }
+.cover--tinta .numbered-list li + li { border-top-color: rgba(242, 246, 251, 0.2); }
 
 /* Ilustración de fondo: full-bleed, siempre detrás del contenido,
    decorativa (aria-hidden), nunca capta el foco ni el clic. */
@@ -287,10 +293,11 @@ html {
    ========================================================================== */
 .calc-panel {
   background: var(--cal);
-  border: 1.5px solid var(--tinta);
-  border-radius: var(--radius);
+  border: 1.5px solid var(--piedra);
+  border-radius: var(--radius-lg);
   padding: var(--space-3);
   margin-top: var(--space-3);
+  box-shadow: 0 16px 40px -24px rgba(15, 42, 74, 0.35);
 }
 
 .calc-form {
@@ -320,7 +327,7 @@ html {
   font-size: 1.5rem;
   padding: 0.5em 2.4em 0.5em 0.6em;
   border: 1.5px solid var(--tinta);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   background: var(--papel);
   color: var(--tinta);
   min-height: 3rem; /* cómodo con el pulgar */
@@ -342,7 +349,7 @@ select#year-start {
   font-size: 1.5rem;
   padding: 0.5em 0.6em;
   border: 1.5px solid var(--tinta);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   background: var(--papel);
   color: var(--tinta);
   min-height: 3rem;
@@ -402,9 +409,10 @@ select#year-start {
 }
 .waiting-block {
   background: var(--papel);
-  border: 1px solid var(--tinta);
+  border: 1px solid var(--piedra);
   border-radius: var(--radius);
   padding: var(--space-3);
+  box-shadow: 0 12px 28px -20px rgba(15, 42, 74, 0.35);
 }
 .waiting-when {
   font-weight: 600;
@@ -471,37 +479,103 @@ select#year-start {
 }
 
 /* ==========================================================================
-   6. Recursos
+   6. Recursos — carrusel de tarjetas. Se ven ~4 a la vez (menos en
+   móvil, con la siguiente asomando para insinuar que hay más) y se
+   navega deslizando con el dedo o con los botones de flecha.
    ========================================================================== */
-.resources-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+.resources .wrap { max-width: 1040px; }
+
+.resources-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.carousel-controls { display: flex; gap: var(--space-1); flex: 0 0 auto; }
+.carousel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--piedra);
+  background: var(--cal);
+  color: var(--tinta);
+  cursor: pointer;
+}
+.carousel-btn:hover { border-color: var(--musgo); color: var(--musgo); }
+.carousel-btn svg { width: 1.1rem; height: 1.1rem; }
+
+.carousel {
+  display: flex;
   gap: var(--space-2);
   margin-top: var(--space-3);
+  padding: 0.25rem 0.25rem var(--space-2);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
 }
-.resource-card {
-  display: block;
+.carousel::-webkit-scrollbar { display: none; }
+
+.carousel-card {
+  flex: 0 0 auto;
+  width: min(72vw, 232px);
+  scroll-snap-align: start;
+}
+.carousel-card a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6em;
+  height: 100%;
+  padding: var(--space-3);
+  background: var(--cal);
   border: 1px solid var(--piedra);
   border-radius: var(--radius);
-  padding: var(--space-3);
   text-decoration: none;
   color: var(--tinta);
+  box-shadow: 0 14px 32px -24px rgba(15, 42, 74, 0.4);
 }
-.resource-card:hover { border-color: var(--tinta); }
-.resource-card .item-title { color: var(--tinta); }
+.carousel-card a:hover { border-color: var(--musgo); }
+
+.carousel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius);
+  background: #dce9f8;
+  background: color-mix(in srgb, var(--musgo) 12%, var(--cal));
+  color: var(--musgo);
+}
+.carousel-icon svg { width: 1.5rem; height: 1.5rem; }
+
+.carousel-card .item-title { color: var(--tinta); margin: 0; }
+.carousel-more {
+  margin-top: auto;
+  color: var(--musgo);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
 
 @media (min-width: 640px) {
-  .resources-grid { grid-template-columns: 1fr 1fr; }
+  .carousel-card { width: 232px; }
 }
 
 /* ==========================================================================
    7. Suscripción
    ========================================================================== */
 .sub-panel {
-  border: 1.5px solid var(--tinta);
-  border-radius: var(--radius);
+  background: var(--cal);
+  border: 1.5px solid var(--piedra);
+  border-radius: var(--radius-lg);
   padding: var(--space-3);
   margin-top: var(--space-3);
+  box-shadow: 0 16px 40px -24px rgba(15, 42, 74, 0.35);
 }
 .sub-price {
   font-family: var(--font-mono);
@@ -585,7 +659,7 @@ select#year-start {
 .risk-disclaimer {
   border: 1px solid var(--barro);
   border-radius: var(--radius);
-  padding: var(--space-2);
+  padding: var(--space-2) var(--space-3);
   max-width: 70ch;
   color: var(--tinta);
 }

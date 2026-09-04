@@ -214,26 +214,63 @@
   <!-- 6. RECURSOS -->
   <section class="resources" aria-labelledby="resources-heading">
     <div class="wrap">
-      <h2 id="resources-heading">Recursos</h2>
-      <p class="section-intro">Gratis, sin registro, para cuando quieras profundizar.</p>
-      <div class="resources-grid">
-        <a class="resource-card" href="#">
-          <p class="item-title">Guía de tipos de activos</p>
-          <p class="item-desc">Fondos, ETF, acciones, bonos: qué son y para qué sirve cada uno.</p>
-        </a>
-        <a class="resource-card" href="#">
-          <p class="item-title">Guía de tipos de operaciones</p>
-          <p class="item-desc">Comprar, vender, aportar periódicamente: los mecanismos básicos.</p>
-        </a>
-        <a class="resource-card" href="#">
-          <p class="item-title">Fiscalidad de la compraventa de acciones</p>
-          <p class="item-desc">Qué declaras, cuándo y cómo tributan tus ganancias en España.</p>
-        </a>
-        <a class="resource-card" href="#">
-          <p class="item-title">Comparador de brokers</p>
-          <p class="item-desc">Comisiones y condiciones lado a lado, sin recomendación de ninguno.</p>
-        </a>
+      <div class="resources-head">
+        <div>
+          <h2 id="resources-heading">Recursos</h2>
+          <p class="section-intro">Gratis, sin registro, para cuando quieras profundizar.</p>
+        </div>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-btn" id="resources-prev" aria-label="Recursos anteriores">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button type="button" class="carousel-btn" id="resources-next" aria-label="Recursos siguientes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
       </div>
+
+      <ul class="carousel" id="resources-carousel">
+        <li class="carousel-card">
+          <a href="#">
+            <span class="carousel-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="10" height="7" rx="2"/><rect x="10" y="13" width="10" height="7" rx="2"/></svg>
+            </span>
+            <p class="item-title">Guía de tipos de activos</p>
+            <p class="item-desc">Fondos, ETF, acciones, bonos: qué son y para qué sirve cada uno.</p>
+            <span class="carousel-more">Ver más <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="carousel-card">
+          <a href="#">
+            <span class="carousel-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13"/><path d="M13 4l4 4-4 4"/><path d="M20 16H7"/><path d="M11 12l-4 4 4 4"/></svg>
+            </span>
+            <p class="item-title">Guía de tipos de operaciones</p>
+            <p class="item-desc">Comprar, vender, aportar periódicamente: los mecanismos básicos.</p>
+            <span class="carousel-more">Ver más <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="carousel-card">
+          <a href="#">
+            <span class="carousel-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+            </span>
+            <p class="item-title">Fiscalidad de la compraventa de acciones</p>
+            <p class="item-desc">Qué declaras, cuándo y cómo tributan tus ganancias en España.</p>
+            <span class="carousel-more">Ver más <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="carousel-card">
+          <a href="#">
+            <span class="carousel-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20V10"/><path d="M12 20V4"/><path d="M17 20v-7"/><path d="M4 20h16"/></svg>
+            </span>
+            <p class="item-title">Comparador de brokers</p>
+            <p class="item-desc">Comisiones y condiciones lado a lado, sin recomendación de ninguno.</p>
+            <span class="carousel-more">Ver más <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
 

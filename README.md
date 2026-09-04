@@ -29,6 +29,14 @@ Las cinco primeras secciones (hero, calculadora, coste de esperar, qué hacemos,
 
 Es mejora progresiva a propósito: sin JavaScript, o con `prefers-reduced-motion` activado, todo el contenido es visible desde el principio y el scroll-snap se desactiva — nadie se queda con una portada oculta.
 
+## Paleta y esquinas
+
+Paleta de azules y blancos (Tinta = azul noche, Papel = blanco frío, Río = azul de acento, Piedra = gris-azulado, Cal = blanco puro; Barro se mantiene como el único acento cálido, reservado para "qué no somos" y los avisos de riesgo). Esquinas redondeadas en vez de ángulo recto en tarjetas, paneles, inputs y botones (estos últimos en píldora).
+
+## Recursos: carrusel de tarjetas
+
+La sección Recursos es un carrusel horizontal (`#resources-carousel`): se ven ~4 tarjetas a la vez y se navega deslizando (gesto nativo, sin JS) o con los botones de flecha. Cada tarjeta lleva un icono de línea original — nunca iconografía de dinero/gráficas de velas.
+
 ## Pendiente fuera de alcance
 
 El test de perfil, el área privada y el precio (`[PRECIO]`) no están construidos: los enlaces relevantes apuntan a `#` a la espera de esas piezas.

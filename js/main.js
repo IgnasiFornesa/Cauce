@@ -160,4 +160,29 @@
       observer.observe(cover);
     });
   }
+
+  /* ------------------------------------------------------------------
+   * 5. Carrusel de Recursos
+   *
+   * El carrusel es un contenedor con overflow-x nativo: funciona por
+   * gesto (deslizar con el dedo o el trackpad) sin JS. Los botones de
+   * flecha son un atajo adicional para teclado/ratón, no el único
+   * modo de navegarlo.
+   * ------------------------------------------------------------------ */
+  var carousel = document.getElementById('resources-carousel');
+  var prevBtn = document.getElementById('resources-prev');
+  var nextBtn = document.getElementById('resources-next');
+
+  if (carousel && prevBtn && nextBtn) {
+    var scrollByCard = function (direction) {
+      var card = carousel.querySelector('.carousel-card');
+      var step = card ? card.getBoundingClientRect().width + 16 : carousel.clientWidth * 0.8;
+      carousel.scrollBy({
+        left: direction * step,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    };
+    prevBtn.addEventListener('click', function () { scrollByCard(-1); });
+    nextBtn.addEventListener('click', function () { scrollByCard(1); });
+  }
 })();
