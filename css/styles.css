@@ -1,0 +1,498 @@
+/* ==========================================================================
+   Cauce — landing page
+   Paleta: Tinta, Papel, Musgo, Barro, Piedra, Cal (ver brief de diseño).
+   Tipografía: system stack sans para texto, monospace de sistema para
+   toda cifra (calculadora, comparativas, precio).
+   Mobile-first. Sin fuentes ni assets remotos.
+   ========================================================================== */
+
+:root {
+  /* Color */
+  --tinta: #1e2a28;
+  --papel: #f3f1ec;
+  --musgo: #4b6358;
+  --barro: #a34a3a;
+  --piedra: #c9c4b6;
+  --cal: #fffdf8;
+
+  /* Tipografía */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, "Liberation Mono", monospace;
+
+  /* Espaciado */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+
+  --radius: 3px;
+  --max-width: 880px;
+
+  color-scheme: light;
+}
+
+/* ---- Reset mínimo ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+ul, ol { padding: 0; margin: 0; list-style: none; }
+p { margin: 0 0 var(--space-2); }
+h1, h2 { margin: 0 0 var(--space-2); line-height: 1.15; }
+
+a {
+  color: var(--musgo);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
+a:hover { color: var(--tinta); }
+
+/* ---- Foco visible en todo elemento interactivo ---- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+/* ---- Movimiento reducido ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Utilidades de layout ---- */
+.wrap {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-2);
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--tinta);
+  color: var(--papel);
+  padding: var(--space-1) var(--space-2);
+  z-index: 100;
+}
+.skip-link:focus {
+  left: var(--space-2);
+  top: var(--space-2);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--musgo);
+  margin: 0 0 var(--space-1);
+}
+
+.section-intro {
+  max-width: 56ch;
+  color: var(--tinta);
+  opacity: 0.85;
+}
+
+section { padding-block: var(--space-5); }
+section + section { border-top: 1px solid var(--piedra); }
+
+h2 { font-size: 1.5rem; }
+
+/* ---- Botones ---- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.75em 1.4em;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1.5px solid transparent;
+}
+.btn--primary {
+  background: var(--tinta);
+  color: var(--papel);
+}
+.btn--primary:hover { background: var(--musgo); color: var(--papel); }
+.btn--ghost {
+  background: transparent;
+  border-color: var(--tinta);
+  color: var(--tinta);
+}
+.btn--ghost:hover { background: var(--tinta); color: var(--papel); }
+
+/* ==========================================================================
+   Cabecera
+   ========================================================================== */
+.site-header {
+  border-bottom: 1px solid var(--piedra);
+  position: sticky;
+  top: 0;
+  background: var(--papel);
+  z-index: 10;
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-2);
+}
+.wordmark {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   1. Hero
+   ========================================================================== */
+.hero { padding-block: var(--space-5) var(--space-4); }
+.hero h1 { font-size: 2rem; max-width: 18ch; }
+.hero .lead {
+  font-size: 1.1rem;
+  max-width: 48ch;
+  margin-bottom: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .hero h1 { font-size: 2.6rem; }
+}
+
+/* ==========================================================================
+   2. Calculadora — la pieza central. Único elemento que se despega
+   del papel: fondo Cal, borde marcado, sombra nula (planitud del
+   resto de la página frente a esto).
+   ========================================================================== */
+.calculator .wrap { max-width: var(--max-width); }
+
+.calc-panel {
+  background: var(--cal);
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.calc-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--piedra);
+  margin-bottom: var(--space-3);
+}
+
+.field label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.4em;
+}
+
+.input-suffix {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+.input-suffix input {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  padding: 0.5em 2.4em 0.5em 0.6em;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radius);
+  background: var(--papel);
+  color: var(--tinta);
+  min-height: 3rem; /* cómodo con el pulgar */
+}
+.input-suffix .suffix {
+  position: absolute;
+  right: 0.7em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--musgo);
+  pointer-events: none;
+}
+
+select#year-start {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  padding: 0.5em 0.6em;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radius);
+  background: var(--papel);
+  color: var(--tinta);
+  min-height: 3rem;
+}
+
+.calc-result .result-label {
+  font-size: 0.95rem;
+  margin-bottom: 0.2em;
+}
+.result-value {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1.05;
+  margin: 0 0 0.3em;
+}
+.result-value .unit { font-size: 1.6rem; opacity: 0.7; }
+
+.result-detail {
+  font-size: 1.05rem;
+}
+.result-detail strong {
+  font-family: var(--font-mono);
+  color: var(--barro);
+}
+.result-detail #loss-pct {
+  font-family: var(--font-mono);
+  color: var(--barro);
+}
+
+.result-source {
+  font-size: 0.82rem;
+  color: var(--tinta);
+  opacity: 0.65;
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+}
+
+.calc-followup {
+  margin-top: var(--space-3);
+  font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  .calc-form { grid-template-columns: 1fr 1fr; }
+  .result-value { font-size: 3.2rem; }
+}
+
+/* ==========================================================================
+   3. El coste de esperar
+   ========================================================================== */
+.waiting-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin-block: var(--space-3);
+}
+.waiting-block {
+  border: 1px solid var(--piedra);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+.waiting-when {
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+.waiting-value {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 0.2em;
+}
+.waiting-years {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin: 0;
+}
+.hypothesis-note {
+  font-size: 0.85rem;
+  border-left: 3px solid var(--barro);
+  padding-left: 0.8em;
+  opacity: 0.85;
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .waiting-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ==========================================================================
+   4. Qué hacemos
+   ========================================================================== */
+.numbered-list li {
+  display: flex;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+}
+.numbered-list li + li { border-top: 1px solid var(--piedra); }
+.numbered-list .num {
+  font-family: var(--font-mono);
+  color: var(--musgo);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.item-title { font-weight: 600; margin-bottom: 0.2em; }
+.item-desc { margin: 0; opacity: 0.85; }
+
+/* ==========================================================================
+   5. Qué no somos — misma jerarquía tipográfica que "Qué hacemos",
+   no un descargo legal escondido.
+   ========================================================================== */
+.not-list li {
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding-block: var(--space-2);
+  padding-left: 1.6em;
+  position: relative;
+}
+.not-list li + li { border-top: 1px solid var(--piedra); }
+.not-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--barro);
+}
+
+/* ==========================================================================
+   6. Recursos
+   ========================================================================== */
+.resources-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.resource-card {
+  display: block;
+  border: 1px solid var(--piedra);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  text-decoration: none;
+  color: var(--tinta);
+}
+.resource-card:hover { border-color: var(--tinta); }
+.resource-card .item-title { color: var(--tinta); }
+
+@media (min-width: 640px) {
+  .resources-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ==========================================================================
+   7. Suscripción
+   ========================================================================== */
+.sub-panel {
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+}
+.sub-price {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+.sub-includes { margin-bottom: var(--space-3); }
+.sub-includes li {
+  padding-block: 0.5em;
+  padding-left: 1.4em;
+  position: relative;
+}
+.sub-includes li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  color: var(--musgo);
+  font-family: var(--font-mono);
+}
+.sub-includes li + li { border-top: 1px solid var(--piedra); }
+.sub-free-note {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: var(--space-3);
+}
+
+/* ==========================================================================
+   8. FAQ
+   ========================================================================== */
+.faq-item {
+  border-top: 1px solid var(--piedra);
+  padding-block: var(--space-2);
+}
+.faq-item:last-child { border-bottom: 1px solid var(--piedra); }
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-family: var(--font-mono);
+  color: var(--musgo);
+  flex: 0 0 auto;
+}
+.faq-item[open] summary::after { content: "–"; }
+.faq-item p {
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+  max-width: 60ch;
+}
+
+/* ==========================================================================
+   9. CTA final
+   ========================================================================== */
+.final-cta { text-align: left; }
+.final-cta h2 { font-size: 1.8rem; }
+
+/* ==========================================================================
+   10. Pie
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--piedra);
+  padding-block: var(--space-4);
+  font-size: 0.9rem;
+}
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.footer-legal a { color: var(--tinta); }
+
+.risk-disclaimer {
+  border: 1px solid var(--barro);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  max-width: 70ch;
+  color: var(--tinta);
+}
+
+.copyright {
+  opacity: 0.6;
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+}

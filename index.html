@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cauce — Entiende qué tipo de inversor eres</title>
+<meta name="description" content="Educación financiera sin jerga ni promesas de rentabilidad. Calcula cuánto pierde de valor tu dinero parado y descubre qué tipo de inversor eres.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="wordmark" href="#top">Cauce</a>
+    <nav aria-label="Principal">
+      <a class="btn btn--ghost" href="#">Hacer el test</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <h1>El dinero parado también pierde valor.</h1>
+      <p class="lead">Cauce te ayuda a entender qué tipo de inversor eres y qué estrategias encajan con tu perfil, tu horizonte y tu capital disponible.</p>
+      <a class="btn btn--primary" href="#">Hacer el test de perfil →</a>
+    </div>
+  </section>
+
+  <!-- 2. CALCULADORA DE INFLACIÓN -->
+  <section class="calculator" id="calculadora" aria-labelledby="calc-heading">
+    <div class="wrap">
+      <p class="eyebrow">Cuánto has perdido</p>
+      <h2 id="calc-heading">¿Cuánto vale hoy el dinero que tienes parado?</h2>
+
+      <div class="calc-panel">
+        <form class="calc-form" novalidate>
+          <div class="field">
+            <label for="amount">Tienes parados</label>
+            <div class="input-suffix">
+              <input type="number" id="amount" name="amount" inputmode="decimal" min="0" step="100" value="10000" autocomplete="off">
+              <span class="suffix" aria-hidden="true">€</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="year-start">desde</label>
+            <select id="year-start" name="year-start"></select>
+          </div>
+        </form>
+
+        <div class="calc-result" aria-live="polite">
+          <p class="result-label">Hoy equivalen a</p>
+          <p class="result-value"><span id="real-value">—</span> <span class="unit">€</span></p>
+          <p class="result-detail">de poder adquisitivo. Has perdido <strong id="loss-amount">—</strong> € (<span id="loss-pct">—</span>&nbsp;%).</p>
+          <p class="result-source">Fuente: IPC (INE), variación interanual de diciembre. Cálculo con datos hasta diciembre de 2025, el último publicado.</p>
+        </div>
+      </div>
+
+      <p class="calc-followup">Esto no te dice qué hacer con tu dinero. Para eso está el test. <a href="#">Hacer el test de perfil →</a></p>
+    </div>
+  </section>
+
+  <!-- 3. EL COSTE DE ESPERAR -->
+  <section class="waiting-cost" aria-labelledby="waiting-heading">
+    <div class="wrap">
+      <h2 id="waiting-heading">El coste de esperar</h2>
+      <p class="section-intro">Así cambia una aportación única de 10.000&nbsp;€ a 20 años vista, según cuándo empieces.</p>
+
+      <div class="waiting-grid">
+        <div class="waiting-block">
+          <p class="waiting-when">Empiezas hoy</p>
+          <p class="waiting-value" id="wait-0">—</p>
+          <p class="waiting-years">20 años invertidos</p>
+        </div>
+        <div class="waiting-block">
+          <p class="waiting-when">Empiezas en 5 años</p>
+          <p class="waiting-value" id="wait-5">—</p>
+          <p class="waiting-years">15 años invertidos</p>
+        </div>
+        <div class="waiting-block">
+          <p class="waiting-when">Empiezas en 10 años</p>
+          <p class="waiting-value" id="wait-10">—</p>
+          <p class="waiting-years">10 años invertidos</p>
+        </div>
+      </div>
+
+      <p class="hypothesis-note">* Supuesto hipotético de una rentabilidad del 5&nbsp;% anual compuesto. No es una previsión ni una rentabilidad que Cauce prometa o gestione: es un ejemplo para ilustrar el efecto del tiempo.</p>
+    </div>
+  </section>
+
+  <!-- 4. QUÉ HACEMOS -->
+  <section class="what-we-do" aria-labelledby="do-heading">
+    <div class="wrap">
+      <h2 id="do-heading">Qué hacemos</h2>
+      <ol class="numbered-list">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <p class="item-title">Entender tu perfil</p>
+            <p class="item-desc">Tu tolerancia al riesgo, tu horizonte temporal y cuánto capital puedes destinar, sin prisa y sin presión.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <p class="item-title">Conocer los activos que existen</p>
+            <p class="item-desc">Qué es un fondo indexado, un ETF, un bono o una acción, explicado sin jerga.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <p class="item-title">Elegir una estrategia coherente</p>
+            <p class="item-desc">Una combinación de activos que encaje con tu perfil, no con lo que esté de moda.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <div>
+            <p class="item-title">Ejecutarla sin errores caros</p>
+            <p class="item-desc">Comisiones altas, falta de diversificación o decisiones por pánico cuestan más que cualquier acierto.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. QUÉ NO SOMOS -->
+  <section class="what-we-are-not" aria-labelledby="not-heading">
+    <div class="wrap">
+      <h2 id="not-heading">Qué no somos</h2>
+      <p class="section-intro">La confianza en este sector se gana diciendo lo que no se hace. Esto es lo que no hacemos:</p>
+      <ul class="not-list">
+        <li>No vendemos productos financieros.</li>
+        <li>No cobramos comisiones de ningún banco ni bróker.</li>
+        <li>No gestionamos tu dinero: las decisiones y la ejecución son siempre tuyas.</li>
+        <li>No prometemos rentabilidad. Nadie que sea serio puede prometerla.</li>
+        <li>No somos asesores registrados en la CNMV. Ofrecemos educación, no asesoramiento personalizado.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. RECURSOS -->
+  <section class="resources" aria-labelledby="resources-heading">
+    <div class="wrap">
+      <h2 id="resources-heading">Recursos</h2>
+      <p class="section-intro">Gratis, sin registro, para cuando quieras profundizar.</p>
+      <div class="resources-grid">
+        <a class="resource-card" href="#">
+          <p class="item-title">Guía de tipos de activos</p>
+          <p class="item-desc">Fondos, ETF, acciones, bonos: qué son y para qué sirve cada uno.</p>
+        </a>
+        <a class="resource-card" href="#">
+          <p class="item-title">Guía de tipos de operaciones</p>
+          <p class="item-desc">Comprar, vender, aportar periódicamente: los mecanismos básicos.</p>
+        </a>
+        <a class="resource-card" href="#">
+          <p class="item-title">Fiscalidad de la compraventa de acciones</p>
+          <p class="item-desc">Qué declaras, cuándo y cómo tributan tus ganancias en España.</p>
+        </a>
+        <a class="resource-card" href="#">
+          <p class="item-title">Comparador de brokers</p>
+          <p class="item-desc">Comisiones y condiciones lado a lado, sin recomendación de ninguno.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SUSCRIPCIÓN -->
+  <section class="subscription" aria-labelledby="sub-heading">
+    <div class="wrap">
+      <h2 id="sub-heading">El área privada</h2>
+      <p class="section-intro">Todo lo anterior es gratis para siempre. La suscripción anual añade lo necesario para llevarlo a la práctica y mantenerlo.</p>
+
+      <div class="sub-panel">
+        <p class="sub-price"><span class="sub-price__amount">[PRECIO]&nbsp;€</span> / año</p>
+        <ul class="sub-includes">
+          <li>Tu plan a partir del resultado del test de perfil</li>
+          <li>Seguimiento de tu cartera</li>
+          <li>Avisos cuando toca rebalancear</li>
+          <li>Acceso a todas las guías y a sus actualizaciones</li>
+        </ul>
+        <p class="sub-free-note">Gratis para siempre: la calculadora, el test de perfil y todas las guías de la sección Recursos.</p>
+        <a class="btn btn--primary" href="#">Empieza por el test →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section class="faq" aria-labelledby="faq-heading">
+    <div class="wrap">
+      <h2 id="faq-heading">Preguntas frecuentes</h2>
+
+      <details class="faq-item">
+        <summary>¿Esto es asesoramiento financiero?</summary>
+        <p>No. Es educación: te explicamos conceptos y estrategias modelo genéricas para que decidas tú. No damos recomendaciones personalizadas de inversión.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Cómo ganáis dinero?</summary>
+        <p>Con la suscripción anual del área privada. No cobramos comisiones de bancos, gestoras ni brokers, así que no tenemos ningún producto que nos interese que compres.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Necesito mucho capital para empezar?</summary>
+        <p>No. El test y las guías sirven igual si tienes 500&nbsp;€ o 50.000&nbsp;€. La estrategia cambia; la lógica para elegirla, no.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Y si pierdo dinero?</summary>
+        <p>Invertir conlleva riesgo de pérdida de capital, siempre. No lo escondemos ni lo suavizamos: por eso insistimos en entender tu perfil y tu horizonte antes de nada.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Me vais a intentar vender algo del banco?</summary>
+        <p>No. No trabajamos con bancos, gestoras ni brokers, y no recomendamos productos concretos.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Qué pasa con mis datos?</summary>
+        <p>La calculadora de esta página funciona en tu navegador: no envía nada a ningún sitio. No usamos analítica ni compartimos datos con terceros.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 9. CTA FINAL -->
+  <section class="final-cta" aria-labelledby="final-cta-heading">
+    <div class="wrap">
+      <h2 id="final-cta-heading">¿Sabes qué tipo de inversor eres?</h2>
+      <p class="section-intro">El test tarda unos minutos y no compromete a nada.</p>
+      <a class="btn btn--primary" href="#">Hacer el test de perfil →</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- 10. PIE -->
+<footer class="site-footer">
+  <div class="wrap">
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="#">Aviso legal</a>
+      <a href="#">Privacidad</a>
+      <a href="#">Cookies</a>
+      <a href="#">Términos</a>
+    </nav>
+
+    <p class="risk-disclaimer">
+      Cauce ofrece contenido educativo. No constituye asesoramiento financiero ni fiscal, ni una recomendación personalizada de inversión. Invertir conlleva riesgo, incluida la pérdida del capital.
+    </p>
+
+    <p class="copyright">© <span id="current-year">2026</span> Cauce</p>
+  </div>
+</footer>
+
+<script src="data/ipc-es.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
