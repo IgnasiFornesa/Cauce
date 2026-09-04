@@ -130,4 +130,34 @@
   if (yearEl) {
     yearEl.textContent = String(new Date().getFullYear());
   }
+
+  /* ------------------------------------------------------------------
+   * 4. Portadas (covers): revelado al entrar en pantalla
+   *
+   * Mejora progresiva a propósito: la clase 'js-reveal' es lo único
+   * que activa el estado inicial oculto en CSS (ver .js-reveal en
+   * css/styles.css). Sin JS, o si la persona prefiere menos
+   * movimiento, todo el contenido es visible desde el principio y no
+   * dependemos de que IntersectionObserver exista.
+   * ------------------------------------------------------------------ */
+  var prefersReducedMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-reveal');
+
+    var covers = document.querySelectorAll('[data-cover]');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    covers.forEach(function (cover) {
+      observer.observe(cover);
+    });
+  }
 })();

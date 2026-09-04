@@ -11,6 +11,7 @@
   --tinta: #1e2a28;
   --papel: #f3f1ec;
   --musgo: #4b6358;
+  --musgo-claro: #8fae9f;
   --barro: #a34a3a;
   --piedra: #c9c4b6;
   --cal: #fffdf8;
@@ -28,6 +29,7 @@
 
   --radius: 3px;
   --max-width: 880px;
+  --header-height: 5.5rem;
 
   color-scheme: light;
 }
@@ -166,18 +168,116 @@ h2 { font-size: 1.5rem; }
 }
 
 /* ==========================================================================
+   Portadas (covers) — secuencia de pantallas completas con scroll-snap,
+   una por cada momento fuerte del argumento (hero, calculadora, coste
+   de esperar, qué hacemos, qué no somos). Cada una trae su ilustración
+   de línea (ver .line) y su color; el resto de la página (Recursos en
+   adelante) sigue en flujo normal sobre Papel.
+   ========================================================================== */
+html {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: var(--header-height);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-snap-type: none; }
+}
+
+.covers { display: block; }
+
+.cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: var(--space-5);
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+.cover + .cover { border-top: none; }
+.covers + section { border-top: 1px solid var(--piedra); }
+
+.cover--papel { background: var(--papel); color: var(--tinta); }
+.cover--cal   { background: var(--cal);   color: var(--tinta); }
+.cover--piedra{ background: var(--piedra);color: var(--tinta); }
+.cover--tinta {
+  background: var(--tinta);
+  color: var(--papel);
+}
+.cover--tinta .section-intro,
+.cover--tinta .item-title,
+.cover--tinta .item-desc { color: var(--papel); }
+.cover--tinta .item-desc { opacity: 0.78; }
+.cover--tinta .eyebrow,
+.cover--tinta .numbered-list .num { color: var(--musgo-claro); }
+.cover--tinta .numbered-list li + li { border-top-color: rgba(243, 241, 236, 0.2); }
+
+/* Ilustración de fondo: full-bleed, siempre detrás del contenido,
+   decorativa (aria-hidden), nunca capta el foco ni el clic. */
+.cover__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.cover__bg svg { width: 100%; height: 100%; display: block; }
+.line {
+  fill: none;
+  stroke-linecap: round;
+}
+.line--piedra { stroke: var(--piedra); stroke-width: 1.5; opacity: 0.8; }
+.line--piedra.line--faint { opacity: 0.5; }
+.line--musgo { stroke: var(--musgo); }
+.line--tinta { stroke: var(--tinta); opacity: 0.5; }
+.line--barro { stroke: var(--barro); }
+.line--claro { stroke: var(--musgo-claro); stroke-width: 2; opacity: 0.85; }
+.line--claro.line--faint { opacity: 0.55; }
+.line--papel { stroke: var(--papel); }
+.line--contour { fill: none; stroke: var(--tinta); stroke-width: 1; opacity: 0.14; }
+.line--thick { stroke-width: 3; }
+.line--dashed { stroke-dasharray: 6 10; }
+
+.cover__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* Revelado al entrar en pantalla: mejora progresiva. Sin JS, o con
+   prefers-reduced-motion, el contenido es visible desde el principio
+   (ver js/main.js, que solo añade .js-reveal si hay movimiento permitido). */
+.js-reveal .cover__content { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.js-reveal .cover.is-in .cover__content { opacity: 1; transform: translateY(0); }
+.js-reveal .cover__bg { opacity: 0; transition: opacity 1s ease; }
+.js-reveal .cover.is-in .cover__bg { opacity: 1; }
+
+.scroll-cue {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: var(--space-4) 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--musgo);
+}
+.scroll-cue__arrow { animation: scroll-cue-bounce 1.8s ease-in-out infinite; }
+@keyframes scroll-cue-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ==========================================================================
    1. Hero
    ========================================================================== */
-.hero { padding-block: var(--space-5) var(--space-4); }
-.hero h1 { font-size: 2rem; max-width: 18ch; }
-.hero .lead {
+#top h1 { font-size: 2rem; max-width: 18ch; }
+.lead {
   font-size: 1.1rem;
   max-width: 48ch;
   margin-bottom: var(--space-3);
 }
 
 @media (min-width: 640px) {
-  .hero h1 { font-size: 2.6rem; }
+  #top h1 { font-size: 2.6rem; }
 }
 
 /* ==========================================================================
@@ -185,8 +285,6 @@ h2 { font-size: 1.5rem; }
    del papel: fondo Cal, borde marcado, sombra nula (planitud del
    resto de la página frente a esto).
    ========================================================================== */
-.calculator .wrap { max-width: var(--max-width); }
-
 .calc-panel {
   background: var(--cal);
   border: 1.5px solid var(--tinta);
@@ -303,7 +401,8 @@ select#year-start {
   margin-block: var(--space-3);
 }
 .waiting-block {
-  border: 1px solid var(--piedra);
+  background: var(--papel);
+  border: 1px solid var(--tinta);
   border-radius: var(--radius);
   padding: var(--space-3);
 }
